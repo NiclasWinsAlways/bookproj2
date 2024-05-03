@@ -1,0 +1,17 @@
+<div *ngIf="book$ | async as book; else loading">
+  <ng-container *ngIf="book; else error">
+    <h2>{{ book.title }} Details</h2>
+    <div><span>Id: </span>{{ book.id }}</div>
+    <div><span>Title: </span>{{ book.title }}</div>
+    <div><span>Author: </span>{{ book.author }}</div>
+    <div><span>Description: </span>{{ book.description }}</div>
+    <div><span>Cover Image: </span><img [src]="book.coverImage" alt="Cover Image"></div>
+    <!-- Add other details if needed and when needed -->
+  </ng-container>
+</div>
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>
+<ng-template #error>
+  <p>{{ error }}</p>
+</ng-template>

@@ -1,0 +1,14 @@
+<div class="stn-card">
+  <div class="stn-header">Change Username</div>
+  <form action="" class="form-horizontal">
+      <div class="stn-input">
+          <label for="currentUsername">Current Username</label>
+          <input type="text" id="currentUsername" name="currentUsername" value="Enter new username here" disabled>
+      </div>
+      <div class="stn-input">
+          <label for="newUsername">New Username</label>
+          <input [(ngModel)]="newUsername" type="text" id="newUsername" name="newUsername" placeholder="New Username">
+      </div>
+      <button (click)="changeUsername()">Change Username</button>
+  </form>
+</div>

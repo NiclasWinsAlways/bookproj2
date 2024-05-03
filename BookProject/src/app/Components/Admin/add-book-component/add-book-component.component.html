@@ -1,0 +1,7 @@
+<form [formGroup]="addBookForm" (ngSubmit)="onSubmit()">
+  <input formControlName="title" placeholder="Enter book title">
+  <input formControlName="author" placeholder="Author">
+  <textarea formControlName="description" placeholder="Book Description"></textarea>
+  <input formControlName="coverImage" placeholder="Cover Image URL">
+  <button type="submit" [disabled]="addBookForm.invalid">Add Book</button>
+</form>

@@ -1,0 +1,180 @@
+/* Main Navigation Bar Styles */
+.navbar {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #35424a; /* Darker shade for better contrast */
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0 20px; /* Add padding on the sides */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* subtle shadow for depth */
+}
+
+/* Logo and Branding */
+.navbar img {
+  height: 40px; /* Adjust logo size as necessary */
+  margin-right: 20px;
+}
+
+/* Navigation Links */
+.navbar .link {
+  color: white;
+  text-decoration: none;
+  padding: 0 1em;
+  font-size: 1.2em;
+  transition: color 0.3s ease; /* Transition for hover effect */
+}
+
+.navbar .link:hover {
+  color: #4ABDAC; /* Bright color for hover state */
+}
+
+/* Flex Spacer */
+.navbar .spacer {
+  flex: 1;
+}
+
+/* Right-aligned Content */
+.navbar .right {
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+  display: none; /* remains hidden until hovered */
+  position: absolute;
+  background-color: #ffffff;
+  color: #333333;
+  min-width: 160px; /* Minimum width for dropdown */
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 20px; /* Align with the navbar right padding */
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.dropdown-content .link {
+  color: #333333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content .link:hover {
+  background-color: #f2f2f2; /* Light grey for hover */
+}
+
+/* Style for the menu icon (hamburger) */
+.menu-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 25px; /* Set the height of the icon */
+  width: 35px; /* Set the width of the icon */
+  padding: 0;
+}
+
+.menu-icon span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 3px;
+}
+
+/* Show the dropdown content when hovering over the menu icon */
+.menu-icon:hover + .dropdown-content,
+.menu-icon:focus + .dropdown-content,
+.dropdown-content:hover {
+  display: block;
+}
+
+/* Hide the dropdown-content when not hovering */
+.dropdown-content {
+  display: none;
+  /* The rest of the dropdown-content styles */
+}
+
+
+/* Dropdown Subtext */
+.dropdown-content .subtext {
+  font-size: 0.8em;
+  color: #999999;
+  padding: 8px 16px;
+  border-top: 1px solid #eeeeee; /* Separator */
+}
+
+/* Display Dropdown on Hover */
+.right:hover .dropdown-content {
+  display: block;
+}
+
+/* Logout Button */
+.logout-btn {
+  background-color: #4ABDAC; /* Matching hover color for consistency */
+  color: white;
+  border: none; /* Remove default border */
+  border-radius: 4px;
+  font-size: 1em;
+  padding: 8px 12px;
+  cursor: pointer; /* Cursor pointer to indicate button */
+  transition: background-color 0.3s ease; /* Transition for button hover */
+}
+
+.logout-btn:hover {
+  background-color: #368f8b; /* Darker shade on hover */
+}
+
+/* Light/Dark Mode Switch */
+@media (prefers-color-scheme: dark) {
+  .navbar {
+      background-color: #2c3e50; /* Dark mode navbar color */
+  }
+
+  .dropdown-content {
+      background-color: #34495e; /* Dark mode dropdown background */
+      color: #bdc3c7; /* Light text for dark backgrounds */
+  }
+
+  .dropdown-content .link {
+      color: #bdc3c7;
+  }
+
+  .dropdown-content .link:hover {
+      background-color: #2c3e50; /* Darker background for hover */
+  }
+
+  .dropdown-content .subtext {
+      color: #95a5a6; /* Grey text for subtext */
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .navbar {
+      background-color: #ecf0f1; /* Light mode navbar color */
+  }
+
+  .dropdown-content {
+      background-color: #bdc3c7; /* Light mode dropdown background */
+      color: #2c3e50; /* Dark text for light backgrounds */
+  }
+
+  .dropdown-content .link {
+      color: #2c3e50;
+  }
+
+  .dropdown-content .link:hover {
+      background-color: #bdc3c7; /* Lighter background for hover */
+  }
+
+  .dropdown-content .subtext {
+      color: #7f8c8d; /* Dark grey text for subtext */
+  }
+}

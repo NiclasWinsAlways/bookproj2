@@ -1,0 +1,32 @@
+<div class="navbar" role="banner">
+  <p>Dead</p>
+  <a routerLink="/" class="link">Bookers Home</a>
+  <div class="spacer">
+      <a class="link" routerLink="/profile">Profile</a>
+      <a class="link" routerLink="/library">Library</a>
+      <!-- Conditionally render the Admin Dashboard link -->
+      <div *ngIf="isLoggedIn && isAdmin">
+
+        <a  class="link" routerLink="/admin/dashboard">Admin Dashboard</a>
+      </div>
+      <div>
+        {{isAdmin}}
+      {{isLoggedIn}}
+      </div>
+  </div>
+  <div class="right">
+      <button class="menu-icon" (click)="toggleDropdown()">
+          <span></span>
+          <span></span>
+          <span></span>
+      </button>
+      <div class="dropdown-content overflow-top">
+          <a routerLink="/settings" class="link">Settings</a>
+          <a routerLink="/help" class="link">Help</a>
+          <a *ngIf="!isLoggedIn" routerLink="/login" class="link">Login</a>
+          <button *ngIf="isLoggedIn" (click)="logout()" class="logout-btn">Logout</button>
+          <a *ngIf="!isLoggedIn" routerLink="/register" class="link">Register</a>
+          <p class="subtext">written by moron</p>
+      </div>
+  </div>
+</div>

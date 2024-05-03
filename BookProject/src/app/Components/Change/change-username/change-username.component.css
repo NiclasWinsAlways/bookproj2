@@ -1,0 +1,54 @@
+.stn-header {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #727272;
+  margin-bottom: 1rem;
+}
+
+
+.stn-card {
+  padding: 1.5rem;
+  border: 1px solid #727272;
+  border-radius: .5rem;
+  background-color: #f1f1f1;
+  overflow: hidden;
+}
+
+.form-horizontal {
+  box-sizing: border-box;
+  outline: 0;
+}
+
+.stn-input {
+  display: grid;
+  grid-template-columns: minmax(150px,1fr) 4fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+
+  label {
+      text-align: right;
+      padding-right: 1rem;
+  }
+
+  input {
+      background-color: #cecece;
+      border: 1px solid #727272;
+      border-radius: .5rem;
+      padding: .5rem;
+      font-size: 1rem;
+      outline: 0;
+  }
+
+  input:disabled {
+      background-color: #9b9b9b;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .stn-card {
+      background-color: #222222;
+  }
+}

@@ -1,0 +1,14 @@
+<div class="stn-card">
+  <div class="stn-header">Change Email</div>
+  <form action="" class="form-horizontal">
+      <div class="stn-input">
+          <label for="currentEmail">Current Email</label>
+          <input type="text" id="currentEmail" name="currentEmail" value="Enter New Email Here" disabled>
+      </div>
+      <div class="stn-input">
+          <label for="newEmail">New Email</label>
+          <input [(ngModel)]="newEmail" type="text" id="newEmail" name="newEmail" placeholder="New Email">
+      </div>
+      <button (click)="changeEmail()">Change Email</button>
+  </form>
+</div>

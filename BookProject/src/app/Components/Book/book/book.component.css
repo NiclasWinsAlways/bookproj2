@@ -1,0 +1,191 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  line-height: 1.6;
+}
+
+.center-div {
+  text-align: center;
+  margin: 2rem auto;
+  padding: 1rem;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.search input[type="text"],
+.search button {
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.search input[type="text"] {
+  border: 1px solid #ccc;
+  width: calc(100% - 22px);
+}
+
+.search button {
+  background-color: #4ABDAC;
+  color: white;
+  cursor: pointer;
+}
+
+.search button:hover {
+  background-color: #368f8b;
+}
+
+.book-list div {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 15px;
+  width: calc(33.333% - 20px);
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.book-cover-img {
+  width: 150px; /* Set a fixed width */
+  height: 200px; /* Set a fixed height */
+  object-fit: cover; /* Ensures the image covers the div without stretching */
+}
+
+.book-entry button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 170px; /* Slightly larger than the image to accommodate padding */
+  margin: 10px;
+  cursor: pointer;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  border-radius: 5px;
+}
+
+.close {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  cursor: pointer;
+}
+
+.book-list img {
+  width: auto;
+  height: auto;
+  max-width: 100px;
+  max-height: 150px;
+  margin: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #008CBA;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #007BA7;
+}
+
+.fancy-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 5px 2px;
+  transition: background 0.3s ease;
+}
+
+.fancy-button:hover {
+  background-color: #45a049;
+}
+
+.volume-details {
+  margin-top: 10px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.volume-details th,
+.volume-details td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.volume-header {
+  background-color: #f2f2f2;
+  color: #333;
+  padding: 12px 20px;
+}
+
+.update-pages input[type="number"] {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.update-pages button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0ad4e;
+  color: white;
+  cursor: pointer;
+}
+
+.update-pages button:hover {
+  background-color: #ec971f;
+}
+
+.modal-content {
+  padding: 20px;
+  margin: 20px;
+}
+

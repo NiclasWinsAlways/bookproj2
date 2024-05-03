@@ -1,0 +1,53 @@
+<div class="center-div">
+  <h1>Book List</h1>
+
+  <!-- Search Section -->
+  <div class="search">
+    <label for="titleSearch">Enter Title:</label>
+    <input id="titleSearch" type="text" [(ngModel)]="title" placeholder="Enter book title">
+    <button (click)="GetByTitle()">Search for a Book</button>
+  </div>
+
+  <!-- Display Search Results -->
+  <section *ngIf="booklist.length > 0; else noBooksFound">
+    <div *ngFor="let book of booklist" class="book-entry">
+      <button (click)="toggleDetails(book)">
+        <img *ngIf="book.coverImage" [src]="book.coverImage.large" alt="Book cover">
+        <p>{{ book.title.english || book.title.romaji }}</p>
+      </button>
+    </div>
+  </section>
+  <ng-template #noBooksFound>
+    <h2>No books found</h2>
+  </ng-template>
+
+  <!-- Library Section -->
+  <h1>Library</h1>
+  <section *ngIf="isLoggedIn; else promptLogin">
+    <div *ngIf="Library.length > 0; else noLibraryBooks">
+      <div *ngFor="let lib of Library" class="library-entry">
+        <button (click)="toggleDetails(lib.book)">
+          <img *ngIf="lib.book.coverImage" [src]="lib.book.coverImage.large" alt="{{ lib.book.title }}">
+          <p>{{ lib.book.title }}</p>
+        </button>
+      </div>
+    </div>
+  </section>
+  <ng-template #promptLogin>
+    <h2>Please log in to view your library</h2>
+  </ng-template>
+  <ng-template #noLibraryBooks>
+    <h2>No books found in your library</h2>
+  </ng-template>
+
+  <!-- Book Details Modal -->
+  <div *ngIf="selectedBook" class="book-details-modal">
+    <h2>{{ selectedBook.title.english || selectedBook.title.romaji }}</h2>
+    <img *ngIf="selectedBook.coverImage" [src]="selectedBook.coverImage.large" alt="Book cover">
+    <p>{{ selectedBook.description }}</p>
+    <p>Author: {{ selectedBook.author }}</p>
+    <p>Volumes: {{ selectedBook.volumes }}</p>
+    <p>Pages: {{ selectedBook.pages }}</p>
+    <button (click)="selectedBook = null">Close</button>
+  </div>
+</div>

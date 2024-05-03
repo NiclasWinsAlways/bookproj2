@@ -1,0 +1,25 @@
+<!-- Account information -->
+<div class="account-info">
+  <h2>Account Information</h2>
+  <p>Username: {{ acc.userName }}</p>
+  <p>Name: {{ acc.name }}</p>
+  <p>Email: {{ acc.email }}</p>
+
+  <!-- Settings buttons -->
+  <div class="settings-buttons">
+    <button routerLink="/change-username" class="btn btn-primary">Change Username</button>
+    <button routerLink="/change-password" class="btn btn-primary">Change Password</button>
+    <button routerLink="/change-email" class="btn btn-primary">Change Email</button>
+  </div>
+</div>
+
+<button class="delete-account-btn" (click)="toggle()">Delete Account</button>
+
+<!-- Modal for delete confirmation -->
+<div class="modal" *ngIf="isopen">
+  <div class="center-div">
+    <span class="close" (click)="toggle()">&times;</span>
+    <h2>Are you sure you want to delete your account?</h2>
+    <button (click)="DelAcc()">Delete Account</button>
+  </div>
+</div>
