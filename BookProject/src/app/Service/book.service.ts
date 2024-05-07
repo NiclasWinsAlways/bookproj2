@@ -45,20 +45,19 @@ export class BookService {
 
     );
 }
-  AddBook(book: Book, accountId: number): Observable<ApiResponse> {
-    // Adjusting the newBook object to fit what your API expects
+   // Adjusted AddBook method to no longer include accountId in the URL
+   AddBook(book: Book): Observable<any> {
     const newBook = {
       id: book.id,
-      title: book.title.english || book.title.romaji,
-      description: book.description || "", // default to an empty string if undefined
-      author: book.author || "", // default to an empty string if undefined
-      volumes: book.volumes || 0, // default to 0 if undefined
-      pages: book.pages || 0, // default to 0 if undefined
-      coverImage: book.coverImage.large || "" // default to an empty string if undefined
+      title: book.title,
+      description: book.description || "",
+      author: book.author || "",
+      volumes: book.volumes || 0,
+      pages: book.pages || 0,
+      coverImage: book.coverImage || ""
     };
 
-    // Assuming 'DbAddBook' should actually be 'add/{accountId}' as defined in your controller
-    return this.http.post<ApiResponse>(`${this.apiUrl}add/${accountId}`, newBook);
+    return this.http.post<any>(`${this.apiUrl}add`, newBook);
   }
 
   deleteBookFromLibrary(accountId: number, bookId: number): Observable<any> {

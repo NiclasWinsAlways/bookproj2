@@ -134,17 +134,12 @@ GetByTitle() {
 }
 
 AddBook(book: Book) {
-  console.log(`AddBook(${book})`)
-  const accountId = sessionStorage.getItem('accountId');
-  if (!accountId) {
-    console.error('No accountId found in session storage');
-    return;
-  }
+  console.log(`AddBook(${JSON.stringify(book)})`) // Improved logging for debugging
 
-  let id: number = Number(accountId);
-  this.service.AddBook(book, id).subscribe({
+  this.service.AddBook(book).subscribe({  // Updated to match the new method signature
     next: (response: ApiResponse) => {
-      window.location.reload();
+      console.log('Book added successfully:', response);
+      window.location.reload();  // Consider using Angular Router for navigation
     },
     error: (err) => console.error('Error adding book:', err)
   });
