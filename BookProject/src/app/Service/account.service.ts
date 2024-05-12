@@ -50,6 +50,27 @@ export class AccountService {
     this.setLoginStatus(false);
   }
 
+  getAllAccounts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}list`).pipe(
+      catchError(error => {
+        console.error('Error fetching users:', error);
+        return throwError(() => new Error('Failed to fetch users'));
+      })
+    );
+  }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get(`${this.apiUrl}list`).pipe(
+      catchError(error => throwError(() => new Error('Error fetching all users: ' + error.message)))
+    );
+  }
+
+  getUserDetails(accountId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}GetAccInfo/${accountId}`).pipe(
+      catchError(error => throwError(() => new Error('Error fetching user details: ' + error.message)))
+    );
+  }
+
   register(accountData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}create`, accountData, this.getHttpOptions()).pipe(
       catchError(this.handleError('register', []))

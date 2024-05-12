@@ -1,0 +1,42 @@
+/* Style for the overall admin dashboard */
+.admin-dashboard {
+  font-family: 'Arial', sans-serif; /* Example font */
+  color: #333; /* Dark grey text for readability */
+  background-color: #f8f8f8; /* Light grey background */
+  padding: 20px; /* Spacing around content */
+  max-width: 1200px; /* Max width of the dashboard area */
+  margin: auto; /* Centering the dashboard */
+}
+
+/* Navigation styling */
+.admin-dashboard nav ul {
+  list-style-type: none; /* Removes default list styling */
+  padding: 0;
+  background-color: #004880; /* Dark blue background */
+  overflow: hidden; /* Clears floats */
+  border: 1px solid #ddd; /* Light grey border for some visual separation */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.admin-dashboard nav li {
+  float: left; /* Aligns the items horizontally */
+}
+
+.admin-dashboard nav li a {
+  display: block;
+  color: white; /* White text color */
+  text-align: center;
+  padding: 14px 16px; /* Spacing inside each link */
+  text-decoration: none; /* No underlines on links */
+}
+
+/* Hover effect for links */
+.admin-dashboard nav li a:hover {
+  background-color: #ddd; /* Light grey background on hover */
+  color: black; /* Black text on hover */
+}
+
+/* Active link styling */
+.active {
+  background-color: #007BFF; /* Light blue to indicate active page */
+}

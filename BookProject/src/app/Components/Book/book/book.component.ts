@@ -28,6 +28,7 @@ interface BookList {
 })
 export class BookComponent {
   isLoggedIn: boolean = environment.isLoggedIn;
+  books: Book[] = []; // Ensure this is declared like this
 
 public booklist:Book[]=[];
 public selectedBook?: Book | null; // Allowing null explicitly
@@ -89,6 +90,7 @@ constructor(private service:BookService, private volumeService: VolumeService,) 
 ngOnInit(): void {
   this.checkLoginStatus();
   this.GetBookList();
+
 }
 private checkLoginStatus(): void {
   const accountId = sessionStorage.getItem('accountId');
@@ -188,7 +190,6 @@ GetBookVolumes(bookId: number) {
     });
   });
 }
-
 CreateBookVolume(bookId: number) {
   const volumeAmount = this.bookVolumes.length;
   if(volumeAmount < 0 || volumeAmount == null) return;
@@ -234,6 +235,29 @@ UpdateTotalPages(volumeId: number) {
     window.location.reload();
   });
 }
-}
-export { Book };
+loanBook(book: Book): void {
+  if (!book) {
+    console.error('No book provided for loaning.');
+    return;
+  }
+  const dueDate = new Date();
+  dueDate.setDate(dueDate.getDate() + 14); // Set the loan due date to 14 days in the future.
 
+  // Use `this.service` as per your constructor injection
+  this.service.loanBook(book.id, dueDate).subscribe({
+    next: (response: any) => {
+      console.log('Book loaned successfully', response);
+      book.isLoaned = true; // Update the loaned status
+      book.dueDate = dueDate; // Update the due date
+    },
+    error: (error: any) => {
+      console.error('Failed to loan out the book:', error);
+      alert('Failed to loan out the book due to an error.'); // Provide user feedback
+    }
+  });
+}
+
+}
+
+
+export { Book };

@@ -1,0 +1,26 @@
+<div class="users-list">
+  <!-- Iterate over each user and apply conditional styling -->
+  <div *ngFor="let user of users" class="user-item" [class.incomplete]="!user.id" (click)="user.id ? selectUser(user) : null">
+    <!-- Display username and offer a clickable action if user data is complete -->
+    {{ user.userName }} - <span *ngIf="!user.id" class="error">Incomplete Data</span>
+    <span *ngIf="user.id" class="edit-link">Click to edit</span>
+  </div>
+</div>
+
+<div *ngIf="selectedUser" class="user-details">
+  <!-- Bind form controls to the selected user's details for editing -->
+  <div class="form-field">
+    <input type="text" [formControl]="usernameControl" placeholder="New username">
+  </div>
+  <div class="form-field">
+    <input type="email" [formControl]="emailControl" placeholder="New email">
+  </div>
+  <div class="form-field">
+    <input type="password" [formControl]="passwordControl" placeholder="New password">
+  </div>
+  <div class="actions">
+    <!-- Trigger update and delete operations -->
+    <button (click)="updateUserDetails()">Update Details</button>
+    <button (click)="deleteUser(selectedUser.id)">Delete User</button>
+  </div>
+</div>

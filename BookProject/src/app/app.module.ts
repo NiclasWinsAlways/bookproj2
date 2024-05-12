@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +23,8 @@ import { BookListComponentComponent } from './Components/Admin/book-list-compone
 import { AddBookComponentComponent } from './Components/Admin/add-book-component/add-book-component.component';
 import { AdminDashboardComponent } from './Components/Admin/admin-dashboard/admin-dashboard.component';
 import { BookDetailsComponent } from './Components/Details/bookdetails/bookdetails.component';
+import { ManageBooksComponent } from './Components/Admin/managebooks/managebooks.component';
+import { ManageUsersComponent } from './Components/Admin/manageusers/manageusers.component';
 
 @NgModule({
   declarations: [
@@ -36,14 +40,17 @@ import { BookDetailsComponent } from './Components/Details/bookdetails/bookdetai
     BookListComponentComponent,
     AddBookComponentComponent,
     AdminDashboardComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    ManageBooksComponent,
+    ManageUsersComponent  // Make sure this is included
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [BookService, VolumeService], // Adding services here
   bootstrap: [AppComponent]

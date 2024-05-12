@@ -11,6 +11,8 @@ import { AdminDashboardComponent } from './Components/Admin/admin-dashboard/admi
 import { AddBookComponentComponent } from './Components/Admin/add-book-component/add-book-component.component';
 import { BookDetailsComponent } from './Components/Details/bookdetails/bookdetails.component'; // Ensure this path is correct
 import { AdminGuard } from './Service/admin-guard.service';
+import { ManageBooksComponent } from './Components/Admin/managebooks/managebooks.component';
+import { ManageUsersComponent } from './Components/Admin/manageusers/manageusers.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,8 +30,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: AdminDashboardComponent },
-      { path: 'manage-books', component: BookComponent }, // Admin sub-route to manage books
-      { path: 'manage-users', component: ProfileComponent } // Admin sub-route to manage users
+      { path: 'manage-books', component: ManageBooksComponent }, // Admin sub-route to manage books
+      { path: 'manage-users', component: ManageUsersComponent} // Admin sub-route to manage users
     ]
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' }

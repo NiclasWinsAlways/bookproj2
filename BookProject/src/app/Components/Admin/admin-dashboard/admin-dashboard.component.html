@@ -1,9 +1,11 @@
-<h1>Admin Dashboard</h1>
-<nav>
-  <ul>
-    <a routerLink="./dashboard">Dashboard</a>
-    <a routerLink="./manage-books">Manage Books</a>
-    <a routerLink="./manage-users">Manage Users</a>
-
-  </ul>
-</nav>
+<!-- admin-dashboard.component.html -->
+<div class="admin-dashboard">
+  <h1>Admin Dashboard</h1>
+  <nav>
+    <ul>
+      <li><a routerLink="./manage-books" routerLinkActive="active">Manage Books</a></li>
+      <li><a routerLink="./manage-users" routerLinkActive="active">Manage Users</a></li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
+</div>

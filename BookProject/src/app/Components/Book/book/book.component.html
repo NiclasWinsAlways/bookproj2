@@ -1,53 +1,61 @@
 <div class="center-div">
-  <h1>Book List</h1>
+  <h1 class="header">Look up book here For example No Longer Human</h1>
 
   <!-- Search Section -->
-  <div class="search">
-    <label for="titleSearch">Enter Title:</label>
-    <input id="titleSearch" type="text" [(ngModel)]="title" placeholder="Enter book title">
-    <button (click)="GetByTitle()">Search for a Book</button>
+  <div class="search-section">
+    <label for="titleSearch" class="label">Enter Title:</label>
+    <input id="titleSearch" type="text" [(ngModel)]="title" placeholder="Enter book title" class="input">
+    <button (click)="GetByTitle()" class="button">Search for a Book</button>
   </div>
 
   <!-- Display Search Results -->
-  <section *ngIf="booklist.length > 0; else noBooksFound">
+  <section *ngIf="booklist.length > 0; else noBooksFound" class="results-section">
     <div *ngFor="let book of booklist" class="book-entry">
-      <button (click)="toggleDetails(book)">
-        <img *ngIf="book.coverImage" [src]="book.coverImage.large" alt="Book cover">
-        <p>{{ book.title.english || book.title.romaji }}</p>
+      <button (click)="toggleDetails(book)" class="book-button">
+        <!-- Ensure the image source is correctly bound -->
+        <img *ngIf="book.coverImage" [src]="book.coverImage" alt="Book cover" class="book-image">
+        <p>{{ book.title }}</p>
       </button>
     </div>
   </section>
   <ng-template #noBooksFound>
-    <h2>No books found</h2>
+    <div class="library-header">
+      <h1>Library</h1>
+      <h2 class="promotional-message">Try out our new book series "No Longer Human" by Dazai!</h2>
+    </div>
   </ng-template>
 
   <!-- Library Section -->
-  <h1>Library</h1>
-  <section *ngIf="isLoggedIn; else promptLogin">
-    <div *ngIf="Library.length > 0; else noLibraryBooks">
+  <section *ngIf="isLoggedIn; else promptLogin" class="library-section">
+    <div *ngIf="Library.length > 0">
       <div *ngFor="let lib of Library" class="library-entry">
-        <button (click)="toggleDetails(lib.book)">
-          <img *ngIf="lib.book.coverImage" [src]="lib.book.coverImage.large" alt="{{ lib.book.title }}">
+        <button (click)="toggleDetails(lib.book)" class="library-button">
+          <!-- Ensure the image source is correctly bound -->
+          <img *ngIf="lib.book.coverImage" [src]="lib.book.coverImage" alt="{{ lib.book.title }}" class="library-image">
           <p>{{ lib.book.title }}</p>
         </button>
       </div>
     </div>
+    <ng-template #noLibraryBooks>
+      <h2>Try out our new book series "No Longer Human" by Dazai!</h2>
+    </ng-template>
   </section>
   <ng-template #promptLogin>
     <h2>Please log in to view your library</h2>
   </ng-template>
-  <ng-template #noLibraryBooks>
-    <h2>No books found in your library</h2>
-  </ng-template>
 
-  <!-- Book Details Modal -->
-  <div *ngIf="selectedBook" class="book-details-modal">
-    <h2>{{ selectedBook.title.english || selectedBook.title.romaji }}</h2>
-    <img *ngIf="selectedBook.coverImage" [src]="selectedBook.coverImage.large" alt="Book cover">
-    <p>{{ selectedBook.description }}</p>
-    <p>Author: {{ selectedBook.author }}</p>
-    <p>Volumes: {{ selectedBook.volumes }}</p>
-    <p>Pages: {{ selectedBook.pages }}</p>
-    <button (click)="selectedBook = null">Close</button>
-  </div>
+<!-- Book Details Modal -->
+<div *ngIf="selectedBook" class="book-details-modal">
+  <h2>{{ selectedBook.title }}</h2>
+  <img *ngIf="selectedBook.coverImage" [src]="selectedBook.coverImage" alt="Book cover" class="modal-image">
+  <p>{{ selectedBook.description }}</p>
+  <p>Author: {{ selectedBook.author }}</p>
+  <p>Volumes: {{ selectedBook.volumes }}</p>
+  <p>Pages: {{ selectedBook.pages }}</p>
+
+  <!-- Loan Button: Only show if the book is not currently loaned -->
+  <button *ngIf="!selectedBook?.isLoaned" (click)="loanBook(selectedBook)">Loan Out</button>
+
+  <button (click)="closeDetails()" class="close-button">Close</button>
+</div>
 </div>

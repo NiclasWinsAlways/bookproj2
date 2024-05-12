@@ -1,0 +1,24 @@
+<div class="manage-books">
+  <h2>Manage Books</h2>
+  <button (click)="showAddBookForm = true">Add Book</button>
+  <button (click)="loadBooks()">Refresh Book List</button>
+
+  <div *ngIf="showAddBookForm">
+    <form (ngSubmit)="addBook()">
+      <input type="text" [(ngModel)]="newBook.title.english" name="title" placeholder="Title" required />
+      <input type="text" [(ngModel)]="newBook.author" name="author" placeholder="Author" />
+      <textarea [(ngModel)]="newBook.description" name="description" placeholder="Description"></textarea>
+      <input type="number" [(ngModel)]="newBook.volumes" name="volumes" placeholder="Volumes" />
+      <input type="number" [(ngModel)]="newBook.pages" name="pages" placeholder="Pages" />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+
+  <ul *ngIf="books.length">
+    <li *ngFor="let book of books">
+      {{ book.title }} by {{ book.author }} ({{ book.pages }} pages)
+      <button (click)="deleteBook(book.id)">Delete</button>
+    </li>
+  </ul>
+</div>
