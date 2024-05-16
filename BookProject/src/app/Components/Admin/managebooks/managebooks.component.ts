@@ -46,4 +46,19 @@ export class ManageBooksComponent implements OnInit {
       error: (error) => console.error('Failed to delete book', error)
     });
   }
+  handleFileInput(event: Event): void {
+    const element = event.target as HTMLInputElement;
+    const files = element.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        if (typeof fileReader.result === 'string') {
+          this.newBook.coverImage.large = fileReader.result;
+        }
+      };
+      fileReader.readAsDataURL(file);
+    }
+  }
+
 }

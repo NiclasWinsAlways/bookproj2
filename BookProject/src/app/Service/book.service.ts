@@ -44,19 +44,26 @@ export class BookService {
   }
 
 
-   AddBook(book: Book): Observable<any> {
-    const newBook = {
-      id: book.id,
-      title: book.title,
-      description: book.description || "",
-      author: book.author || "",
-      volumes: book.volumes || 0,
-      pages: book.pages || 0,
-      coverImage: book.coverImage || ""
-    };
+  AddBook(book: Book): Observable<any> {
+    const formData = new FormData();
+    formData.append('title', book.title.english);
+    formData.append('description', book.description);
+    formData.append('author', book.author);
+    formData.append('volumes', book.volumes.toString());
+    formData.append('pages', book.pages.toString());
+    formData.append('status', book.status);
+    formData.append('format', book.format);
+    formData.append('showdetails', book.showdetails.toString());
+    formData.append('isLoaned', book.isLoaned ? book.isLoaned.toString() : 'false');
+    formData.append('dueDate', book.dueDate ? book.dueDate.toISOString() : '');
 
-    return this.http.post<any>(`${this.apiUrl}add`, newBook);
-  }
+    if (book.coverImage && book.coverImage.large) {
+        // Assuming `large` is a base64 string of the image
+        formData.append('coverImage', book.coverImage.large);
+    }
+
+    return this.http.post<any>(`${this.apiUrl}books/add`, formData);
+}
 
   getBookList(): Observable<Book[]> {
     return this.http.get<Book[]>(`${this.apiUrl}all`);
@@ -68,17 +75,17 @@ export class BookService {
   deleteBookFromLibrary(accountId: number, bookId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}delete/${bookId}/${accountId}`);
   }
-
   loanBook(bookId: number, dueDate: Date): Observable<any> {
-    return this.http.post(`${this.apiUrl}books/loan/${bookId}`, { dueDate }, { headers: new HttpHeaders({'Content-Type': 'application/json'}) })
-      .pipe(
-        catchError(error => {
-          console.error('Error loaning book:', error);
-          return throwError(() => new Error('Error loaning book'));
-        })
-      );
+    const formattedDate = dueDate.toISOString(); // Ensure date is in ISO 8601 format
+    return this.http.post(`${this.apiUrl}loan/${bookId}`, { dueDate: formattedDate }, {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }).pipe(
+      catchError(error => {
+        console.error('Error loaning book:', error);
+        return throwError(() => new Error('Error loaning book'));
+      })
+    );
   }
-
 
 }
 
