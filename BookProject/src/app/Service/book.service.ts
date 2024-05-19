@@ -43,7 +43,6 @@ export class BookService {
     return this.http.get(`${this.apiUrl}${id}`);
   }
 
-
   AddBook(book: Book): Observable<any> {
     const formData = new FormData();
     formData.append('title', book.title.english);
@@ -62,7 +61,7 @@ export class BookService {
         formData.append('coverImage', book.coverImage.large);
     }
 
-    return this.http.post<any>(`${this.apiUrl}books/add`, formData);
+    return this.http.post<any>(`${this.apiUrl}add`, formData);
 }
 
   getBookList(): Observable<Book[]> {

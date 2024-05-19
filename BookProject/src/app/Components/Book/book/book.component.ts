@@ -27,19 +27,15 @@ interface BookList {
   styleUrls: ['./book.component.css']
 })
 export class BookComponent {
-  isLoggedIn: boolean = environment.isLoggedIn;
-  books: Book[] = []; // Ensure this is declared like this
-
-public booklist:Book[]=[];
-public selectedBook?: Book | null; // Allowing null explicitly
-
-public Library: BookList[] = [];
-public bookVolumes: Volume[] = [];
-// VolumeProgress map
-public volumeProgressMap: Map<number, VolProgress> = new Map<number, VolProgress>();
-
-public showModal: boolean = false;
-  bookService: any;
+  isLoggedIn: boolean = false;
+  isAdmin: boolean = false;  // Declare isAdmin property
+  books: Book[] = [];
+  public booklist: Book[] = [];
+  public selectedBook?: Book | null;
+  public Library: BookList[] = [];
+  public bookVolumes: Volume[] = [];
+  public volumeProgressMap: Map<number, VolProgress> = new Map<number, VolProgress>();
+  public showModal: boolean = false;
 
 //toggleDetails(book:Book) {
   //if (this.showModal) return;
@@ -94,7 +90,10 @@ ngOnInit(): void {
 }
 private checkLoginStatus(): void {
   const accountId = sessionStorage.getItem('accountId');
+  const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
   this.isLoggedIn = accountId !== null;
+  this.isAdmin = isAdmin;
+  console.log('Check login status, isLoggedIn:', this.isLoggedIn, 'isAdmin:', this.isAdmin);
 }
 // label changes
 Title(event:any){

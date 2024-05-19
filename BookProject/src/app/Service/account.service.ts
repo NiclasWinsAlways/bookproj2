@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { catchError, tap, retry } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -25,10 +25,11 @@ export class AccountService {
     return sessionStorage.getItem('isAdmin') === 'true';
   }
 
-  public setLoginStatus(loggedIn: boolean): void {
-    this.isLoggedInSubject.next(loggedIn);
-    sessionStorage.setItem('isAdmin', loggedIn ? 'true' : 'false'); // Correct handling of admin status
-    this.isAdminSubject.next(loggedIn && this.checkAdminStatus());
+  private updateLoginStatus(): void {
+    const isLoggedIn = this.checkLoginStatus();
+    const isAdmin = this.checkAdminStatus();
+    this.isLoggedInSubject.next(isLoggedIn);
+    this.isAdminSubject.next(isAdmin);
   }
 
   login(credentials: { username: string; password: string }): Observable<any> {
@@ -37,17 +38,18 @@ export class AccountService {
         if (response && response.accountId) {
           sessionStorage.setItem('accountId', response.accountId.toString());
           sessionStorage.setItem('isAdmin', response.isAdmin.toString());
-          this.setLoginStatus(true);
+          this.updateLoginStatus();
         }
       }),
       catchError(this.handleError('login', []))
     );
   }
 
+
   logout(): void {
     sessionStorage.removeItem('accountId');
     sessionStorage.removeItem('isAdmin');
-    this.setLoginStatus(false);
+    this.updateLoginStatus();
   }
 
   getAllAccounts(): Observable<any[]> {
@@ -124,6 +126,7 @@ export class AccountService {
       })
     );
   }
+
   private getHttpOptions() {
     return {
       headers: new HttpHeaders({
