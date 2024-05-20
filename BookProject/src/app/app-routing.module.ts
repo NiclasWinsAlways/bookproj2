@@ -13,6 +13,7 @@ import { BookDetailsComponent } from './Components/Details/bookdetails/bookdetai
 import { AdminGuard } from './Service/admin-guard.service';
 import { ManageBooksComponent } from './Components/Admin/managebooks/managebooks.component';
 import { ManageUsersComponent } from './Components/Admin/manageusers/manageusers.component';
+import { ManageLoansComponent } from './Components/Admin/manageloans/manageloans.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'manage-books', component: ManageBooksComponent }, // Admin sub-route to manage books
-      { path: 'manage-users', component: ManageUsersComponent} // Admin sub-route to manage users
+      { path: 'manage-users', component: ManageUsersComponent}, // Admin sub-route to manage users
+      {path: 'manage-loans', component: ManageLoansComponent}
     ]
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' }

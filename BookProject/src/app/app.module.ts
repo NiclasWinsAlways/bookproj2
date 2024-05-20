@@ -25,6 +25,7 @@ import { AdminDashboardComponent } from './Components/Admin/admin-dashboard/admi
 import { BookDetailsComponent } from './Components/Details/bookdetails/bookdetails.component';
 import { ManageBooksComponent } from './Components/Admin/managebooks/managebooks.component';
 import { ManageUsersComponent } from './Components/Admin/manageusers/manageusers.component';
+import { ManageLoansComponent } from './Components/Admin/manageloans/manageloans.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ManageUsersComponent } from './Components/Admin/manageusers/manageusers
     AdminDashboardComponent,
     BookDetailsComponent,
     ManageBooksComponent,
-    ManageUsersComponent  // Make sure this is included
+    ManageUsersComponent,
+    ManageLoansComponent  // Make sure this is included
   ],
   imports: [
     BrowserModule,

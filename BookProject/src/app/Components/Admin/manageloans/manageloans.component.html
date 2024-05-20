@@ -1,0 +1,24 @@
+<div>
+  <h2>Manage Book Loans</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Book Title</th>
+        <th>Loaned To</th>
+        <th>Due Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let loan of loans">
+        <td>{{ loan.bookTitle }}</td>
+        <td>{{ loan.accountName }}</td>
+        <td>{{ loan.dueDate | date }}</td>
+        <td>
+          <button (click)="returnBook(loan.bookId, loan.accountId)">Return</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
