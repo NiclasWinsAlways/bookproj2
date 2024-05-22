@@ -29,8 +29,7 @@ export class ManageBooksComponent implements OnInit {
     this.bookService.AddBook(this.newBook).subscribe({
       next: (response) => {
         console.log('Book added successfully:', response);
-        this.books.push(response);
-        this.showAddBookForm = false;
+        this.books.push(response); // Optionally update the local state if needed
         this.newBook = new Book(); // Reset the form model
       },
       error: (error) => console.error('Failed to add book', error)

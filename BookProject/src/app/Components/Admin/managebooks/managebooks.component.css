@@ -1,10 +1,68 @@
-.manage-books {
-  font-family: Arial, sans-serif;
-  color: #333;
-  background-color: #f4f4f4;
-  padding: 20px;
-  border-radius: 8px;
+.manage-books li {
+  background: white;
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between; /* This will place the book details on one side and the button on the opposite side */
+  align-items: center; /* This will vertically center the contents */
 }
+
+
+.manage-books h2 {
+  color: #205081; /* Dark blue color */
+}
+
+.manage-books button {
+  background-color: #007BFF; /* Bootstrap primary blue */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.manage-books button:hover {
+  background-color: #0056b3; /* Darker blue */
+}
+
+.manage-books input[type="text"],
+.manage-books input[type="number"],
+.manage-books textarea {
+  padding: 10px;
+  margin: 5px 0;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  width: calc(100% - 22px); /* Full width minus padding and border */
+}
+
+.manage-books form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  grid-gap: 10px;
+  align-items: center;
+}
+
+.manage-books ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.manage-books li {
+  background: white;
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.manage-books li button {
+  float: right;
+}
+
 
 .manage-books h2 {
   color: #205081; /* Dark blue color */

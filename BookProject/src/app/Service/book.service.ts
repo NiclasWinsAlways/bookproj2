@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { Book } from '../Model/Book';
 import { BookProgress } from '../Model/BookProject';
 import { environment } from '../../environments/environment';
-//add potential coverimages later
+
 interface ApiResponse {
   data: {
     Media: Book;
@@ -21,16 +21,18 @@ interface BookListResponse {
 })
 export class BookService {
   private readonly apiUrl = environment.apiUrl + "Book/";
+  service: any;
+  booklist: any;
 
   constructor(private http: HttpClient) { }
 
   GetByTitle(title: string): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const bookRequest = {
-        title: title, // Properly formatted as an object
-        description: '', // Added missing colons
-        author: '',
-        coverImage: ''
+      title: title,
+      description: '',
+      author: '',
+      coverImage: ''
     };
     return this.http.post<any>(`${this.apiUrl}GetBookByTitle`, bookRequest, { headers });
   }
@@ -44,25 +46,18 @@ export class BookService {
   }
 
   AddBook(book: Book): Observable<any> {
-    const formData = new FormData();
-    formData.append('title', book.title.english);
-    formData.append('description', book.description);
-    formData.append('author', book.author);
-    formData.append('volumes', book.volumes.toString());
-    formData.append('pages', book.pages.toString());
-    formData.append('status', book.status);
-    formData.append('format', book.format);
-    formData.append('showdetails', book.showdetails.toString());
-    formData.append('isLoaned', book.isLoaned ? book.isLoaned.toString() : 'false');
-    formData.append('dueDate', book.dueDate ? book.dueDate.toISOString() : '');
-
-    if (book.coverImage && book.coverImage.large) {
-        // Assuming `large` is a base64 string of the image
-        formData.append('coverImage', book.coverImage.large);
-    }
-
-    return this.http.post<any>(`${this.apiUrl}add`, formData);
-}
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const bookData = {
+      ...book,
+      coverImage: book.coverImage.large // Ensure coverImage is a string
+    };
+    return this.http.post<any>(`${this.apiUrl}add`, bookData, { headers }).pipe(
+      catchError(error => {
+        console.error('Error adding book:', error);
+        return throwError(() => new Error('Error adding book'));
+      })
+    );
+  }
 
   getBookList(): Observable<Book[]> {
     return this.http.get<Book[]>(`${this.apiUrl}all`);
@@ -71,12 +66,17 @@ export class BookService {
   deleteBook(bookId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}delete/${bookId}`);
   }
+
   deleteBookFromLibrary(accountId: number, bookId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}delete/${bookId}/${accountId}`);
   }
-  loanBook(bookId: number, dueDate: Date): Observable<any> {
-    const formattedDate = dueDate.toISOString(); // Ensure date is in ISO 8601 format
-    return this.http.post(`${this.apiUrl}loan/${bookId}`, { dueDate: formattedDate }, {
+
+  loanBook(accountId: number, bookId: number, dueDate: Date): Observable<any> {
+    const formattedDate = dueDate.toISOString();
+    const loanRequest = {
+      dueDate: formattedDate
+    };
+    return this.http.post<any>(`${this.apiUrl}loan/${accountId}/${bookId}`, loanRequest, {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }).pipe(
       catchError(error => {
@@ -86,10 +86,16 @@ export class BookService {
     );
   }
 
+  returnBook(accountId: number, bookId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}return/${accountId}/${bookId}`, {}, {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }).pipe(
+      tap((response: any) => console.log('Response from returnBook:', response)),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error returning book:', error);
+        return throwError(() => new Error('Error returning book'));
+      })
+    );
+  }
+
 }
-
-
-
-  //observable is somthing that we listen to for data async
-//connection to sa server happens like this
-//cobber => xmlhttprequest => ajax=> and so on

@@ -23,6 +23,7 @@ export class ManageLoansComponent implements OnInit {
       );
   }
 
+
   returnBook(bookId: number, accountId: number): void {
     this.http.post(`https://localhost:7236/api/Book/return/${accountId}/${bookId}`, {})
       .subscribe(

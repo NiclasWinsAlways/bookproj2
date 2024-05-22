@@ -44,18 +44,32 @@
     <h2>Please log in to view your library</h2>
   </ng-template>
 
-<!-- Book Details Modal -->
-<div *ngIf="selectedBook" class="book-details-modal">
-  <h2>{{ selectedBook.title }}</h2>
-  <img *ngIf="selectedBook.coverImage" [src]="selectedBook.coverImage" alt="Book cover" class="modal-image">
-  <p>{{ selectedBook.description }}</p>
-  <p>Author: {{ selectedBook.author }}</p>
-  <p>Volumes: {{ selectedBook.volumes }}</p>
-  <p>Pages: {{ selectedBook.pages }}</p>
+  <!-- Book Details Modal -->
+  <div *ngIf="selectedBook" class="book-details-modal">
+    <h2>{{ selectedBook.title }}</h2>
+    <img *ngIf="selectedBook.coverImage" [src]="selectedBook.coverImage" alt="Book cover" class="modal-image">
+    <p>{{ selectedBook.description }}</p>
+    <p>Author: {{ selectedBook.author }}</p>
+    <p>Volumes: {{ selectedBook.volumes }}</p>
+    <p>Pages: {{ selectedBook.pages }}</p>
 
-  <!-- Loan Button: Only show if the book is not currently loaned -->
-  <button *ngIf="!selectedBook?.isLoaned" (click)="loanBook(selectedBook)">Loan Out</button>
+    <!-- Loan Button: Only show if the book is not currently loaned -->
+    <button *ngIf="!selectedBook?.isLoaned" (click)="loanBook(selectedBook)">Loan Out</button>
+    <!-- Return Button: Only show if the book is currently loaned -->
+    <button *ngIf="selectedBook?.isLoaned" (click)="returnBook(selectedBook)">Return</button>
 
-  <button (click)="closeDetails()" class="close-button">Close</button>
-</div>
+    <button (click)="closeDetails()" class="close-button">Close</button>
+  </div>
+
+  <!-- List of Loaned Books -->
+  <section *ngIf="booklist.length > 0" class="loaned-books-section">
+    <h2>Loaned Books</h2>
+    <div *ngFor="let book of booklist">
+      <div *ngIf="book.isLoaned" class="loaned-book-entry">
+        <!-- Book details -->
+        <p>{{ book.title }}</p>
+        <button (click)="returnBook(book)">Return</button>
+      </div>
+    </div>
+  </section>
 </div>

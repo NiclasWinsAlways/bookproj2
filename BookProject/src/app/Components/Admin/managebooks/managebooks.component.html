@@ -5,9 +5,7 @@
 
   <div *ngIf="showAddBookForm">
     <form (ngSubmit)="addBook()">
-      <input type="text" [(ngModel)]="newBook.title.english" name="titleEnglish" placeholder="English Title" required />
-   <!--   <input type="text" [(ngModel)]="newBook.title.romaji" name="titleRomaji" placeholder="Romaji Title" />-->
-      <!--<input type="text" [(ngModel)]="newBook.title.native" name="titleNative" placeholder="Native Title" />-->
+      <input type="text" [(ngModel)]="newBook.title" name="title" placeholder="Title" required />
       <input type="text" [(ngModel)]="newBook.author" name="author" placeholder="Author" />
       <textarea [(ngModel)]="newBook.description" name="description" placeholder="Description"></textarea>
       <input type="number" [(ngModel)]="newBook.volumes" name="volumes" placeholder="Volumes" />
@@ -15,13 +13,13 @@
       <input type="file" (change)="handleFileInput($event)" placeholder="Upload Cover Image" />
       <button type="submit">Submit</button>
     </form>
+
   </div>
-
-
   <ul *ngIf="books.length">
     <li *ngFor="let book of books">
       {{ book.title }} by {{ book.author }} ({{ book.pages }} pages)
       <button (click)="deleteBook(book.id)">Delete</button>
-    </li>
+  </li>
+
   </ul>
 </div>

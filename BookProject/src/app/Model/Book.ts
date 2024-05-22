@@ -11,6 +11,7 @@ export class Book {
   pages: number = 0;
   isLoaned?: boolean; // Add this line
   dueDate?: Date; // Optionally add this if you manage due dates
+  bookId!: number;
 }
 
 class CoverImage {
